@@ -44,7 +44,7 @@ def main():
 
   #List-tasks command
   list_tasks_command = commands_subparsers.add_parser("list", help="List all or filtered tasks")
-  list_tasks_command.add_argument("--type", type=str)
+  list_tasks_command.add_argument("--type", type=str, choices=["todo", "in-progress", "done"])
 
   #Calls the right method according to the command
   args = parser.parse_args()
@@ -123,6 +123,11 @@ def delete_task(id):
 
 #By AI
 def print_tasks_table(data):
+
+  if not data:
+        print("No tasks found.")
+        return
+
   headers = ["ID", "Description", "Status", "Created at", "Updated at"]
 
   rows = []
